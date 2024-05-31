@@ -1,0 +1,11 @@
+<div class="loggeduser" th:object="${session}">
+    <p th:if="*{user == null}">
+        <button type="button" class="btn btn-secondary">
+            <a style="color: white" href="/login" th:href="@{/login}"> Iniciar Sesión</a>
+        </button>
+    </p>
+    <p th:unless="*{user == null}">
+        <span style="" th:text="'Bienvenid@ ' + *{user.username}" ></span>
+        <a href="/logout" th:href="@{/logout}"></a>
+    </p>
+</div>

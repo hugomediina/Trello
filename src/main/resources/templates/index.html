@@ -1,14 +1,67 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
     <title>Trello</title>
+    <style>
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 200px;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.2);
+        }
+
+        .image-container img:hover + img {
+            transform: scale(0.8);
+        }
+
+        .image-container img:first-child:hover ~ img {
+            transform: scale(0.8);
+        }
+
+        .title-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .title-container h1 {
+            font-size: 3rem;
+            color: rgba(0, 0, 0, 0.76);
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-
-<img src="trello.png"/>
+<div layout:fragment="content" >
+    <div class="container">
+        <div class="row title-container">
+            <div class="col">
+                <h1>TRELLO</h1>
+            </div>
+        </div>
+        <div class="row justify-content-center align-items-center image-container">
+            <div class="col-auto">
+                <a th:href="@{/tablero/list}"><img src="trello.png" class="img-fluid" alt="Trello"></a>
+            </div>
+            <div class="col-auto">
+                <img src="trello_tests.png" class="img-fluid" alt="Trello Tests">
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
