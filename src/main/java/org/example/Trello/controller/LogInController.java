@@ -45,9 +45,11 @@ public class LogInController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public String registerUser(@ModelAttribute("user") UserDetails user, Model model){
-        user = userDetailsDao.loadByUsername(user.getUsername(),user.getPassword());
+        System.out.println(user);
 
-        if (user != null) {
+        UserDetails usuario = userDetailsDao.loadByUsername(user.getUsername(),user.getPassword());
+        //todo Añadir validador
+        if (usuario != null) {
             model.addAttribute("error", "El usuario ya existe");
             return "signin";
         }

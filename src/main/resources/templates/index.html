@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
     <title>Trello</title>
     <style>
+
         .image-container {
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -25,11 +25,7 @@
             transform: scale(1.2);
         }
 
-        .image-container img:hover + img {
-            transform: scale(0.8);
-        }
-
-        .image-container img:first-child:hover ~ img {
+        .image-container img:not(:hover) {
             transform: scale(0.8);
         }
 

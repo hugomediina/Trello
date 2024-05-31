@@ -13,11 +13,11 @@ import java.util.List;
 
 @Repository
 public class UserDetailsDao {
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
     private BasicPasswordEncryptor encryptor;
 
     @Autowired
-    public UserDetailsDao(DataSource dataSource){
+    public void setDataSource(DataSource dataSource){
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     public void addUser(UserDetails userDetails){

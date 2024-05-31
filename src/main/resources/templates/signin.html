@@ -33,6 +33,7 @@
                                 <label for="password">Contraseña</label>
                                 <input class="form-control" id="password" type="password" th:field="*{password}" placeholder="Contraseña" required/>
                             </div>
+                            <input type="hidden" th:field="*{tipo}" th:value="1">
                             <button class="btn btn-primary btn-block" type="submit">Regístrate</button>
                         </form>
                     </div>

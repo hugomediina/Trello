@@ -27,6 +27,6 @@ public class TableroController {
         }
         List<Tablero> tableroList = tableroDao.getTableros();
         model.addAttribute("tableroList",tableroList);
-        return "redirect:/";
+        return "/tablero/list";
     }
 }
