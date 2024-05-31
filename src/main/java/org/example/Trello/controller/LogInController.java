@@ -33,8 +33,10 @@ public class LogInController {
             return "login";
         }
         httpSession.setAttribute("user", user);
+        String path = (String) httpSession.getAttribute("path");
+        httpSession.removeAttribute("path");
 
-        return "redirect:/";
+        return "redirect:" + path;
     }
 
     @RequestMapping("/signin")

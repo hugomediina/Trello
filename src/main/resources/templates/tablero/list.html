@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <meta charset="UTF-8">
-    <title>Lista de Tableros</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
+    <title>Trello</title>
 </head>
 <body>
-<h1>Tus tableros</h1>
+<div layout:fragment="content">
+    <h1>Tus tableros</h1>
+</div>
 </body>
 </html>

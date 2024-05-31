@@ -23,6 +23,7 @@ public class TableroController {
     public String listTableros(Model model, HttpSession httpSession){
         UserDetails user = (UserDetails) httpSession.getAttribute("user");
         if(user==null){
+            httpSession.setAttribute("path", "/tablero/list");
             return "redirect:../login";
         }
         List<Tablero> tableroList = tableroDao.getTableros();
