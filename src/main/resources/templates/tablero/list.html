@@ -5,12 +5,57 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
-    <title>Trello</title>
+    <title>Mis Tableros - Trello</title>
+    <style>
+        .board-card {
+            margin: 10px;
+            padding: 20px;
+            width: 200px;
+            height: 150px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .board-card:hover {
+            transform: scale(1.05);
+        }
+
+        .add-board-card {
+            font-size: 1.5rem;
+            color: rgba(5, 5, 5, 0.77);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<div layout:fragment="content">
-    <h1>Tus tableros</h1>
+<div layout:fragment="content" class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="my-4">Mis Tableros</h1>
+        </div>
+    </div>
+    <!--todo HACER MEJOR-->
+    <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <div class="card board-card add-board-card" data-toggle="modal" data-target="#addBoardModal">
+                <div class="card-body text-center">
+                    <a style="color: black" th:href="add" role="button">+ Añadir Tablero</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="board-card" th:each="tablero: ${tableroList}">
+        <a th:href="@{/tablero/{identificador}(identificador=${tablero.idTablero})}">
+            <div th:text="${tablero.nombre}"></div>
+        </a>
+    </div>
 </div>
 </body>
 </html>

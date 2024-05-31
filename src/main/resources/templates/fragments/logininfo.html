@@ -6,6 +6,7 @@
     </p>
     <p th:unless="*{user == null}">
         <span style="" th:text="'Bienvenid@ ' + *{user.username}" ></span>
-        <a href="/logout" th:href="@{/logout}"></a>
+        <a href="/logout" th:href="@{/logout}">Salir</a>
+        <!--todo solucionar error logout-->
     </p>
 </div>

@@ -27,13 +27,15 @@ public class LogInController {
     public String checkLogin(@ModelAttribute("user") UserDetails user,
                                    HttpSession httpSession){
         user = userDetailsDao.loadByUsername(user.getUsername(),user.getPassword());
-
+        String path = "/";
         if (user==null){
             //todo Validadores
             return "login";
         }
         httpSession.setAttribute("user", user);
-        String path = (String) httpSession.getAttribute("path");
+        if(httpSession.getAttribute("path")!=null){
+               path  = (String) httpSession.getAttribute("path");
+        }
         httpSession.removeAttribute("path");
 
         return "redirect:" + path;

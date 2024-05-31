@@ -5,8 +5,10 @@ import org.example.Trello.model.Tablero;
 import org.example.Trello.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -29,5 +31,23 @@ public class TableroController {
         List<Tablero> tableroList = tableroDao.getTableros();
         model.addAttribute("tableroList",tableroList);
         return "/tablero/list";
+    }
+
+    @RequestMapping("/add")
+    public String addTablero(Model model, HttpSession httpSession){
+        UserDetails user = (UserDetails) httpSession.getAttribute("user");
+        if(user==null){
+            httpSession.setAttribute("path", "/tablero/add");
+            return "redirect:../login";
+        }
+        model.addAttribute("tablero", new Tablero());
+        return "tablero/add";
+        //todo añadir la funcionalidad ¿con java o react?...
+    }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("tablero") Tablero tablero,
+                                   HttpSession httpSession) {
+        tableroDao.addTablero(tablero);
+        return "redirect:list";
     }
 }
