@@ -28,7 +28,7 @@ public class TableroController {
             httpSession.setAttribute("path", "/tablero/list");
             return "redirect:../login";
         }
-        List<Tablero> tableroList = tableroDao.getTableros();
+        List<Tablero> tableroList = tableroDao.getTableros(user.getUsername());
         model.addAttribute("tableroList",tableroList);
         return "/tablero/list";
     }
@@ -42,11 +42,14 @@ public class TableroController {
         }
         model.addAttribute("tablero", new Tablero());
         return "tablero/add";
-        //todo añadir la funcionalidad ¿con java o react?...
+
     }
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("tablero") Tablero tablero,
                                    HttpSession httpSession) {
+        UserDetails userDetails = (UserDetails) httpSession.getAttribute("user");
+        tablero.setUsuario(userDetails.getUsername());
+        System.out.println(tablero);
         tableroDao.addTablero(tablero);
         return "redirect:list";
     }

@@ -1,10 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Añadir Tablero</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Añadir Nuevo Tablero</h2>
+            <form th:action="@{/tablero/add}"  th:object="${tablero}" method="post">
+                <div class="form-group">
+                    <label>Nombre del Tablero</label>
+                    <input type="text" class="form-control" name="boardName" th:field="${tablero.nombre}" required>
+                    <input type="hidden"th:field="${tablero.idTablero}">
+                    <input type="hidden"th:field="${tablero.usuario}">
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+                <a href="list" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

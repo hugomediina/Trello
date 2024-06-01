@@ -13,7 +13,7 @@ public class TableroRowMapper implements RowMapper<Tablero> {
         Tablero tablero = new Tablero();
         tablero.setIdTablero(rs.getInt("id_tablero"));
         tablero.setNombre(rs.getString("nombre"));
-        tablero.setUsuario(rs.getString("user"));
+        tablero.setUsuario(rs.getString("usuario"));
         return tablero;
     }
 }

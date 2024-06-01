@@ -1,6 +1,7 @@
 package org.example.Trello.dao;
 
 import org.example.Trello.model.Tablero;
+import org.example.Trello.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,8 +22,8 @@ public class TableroDao {
 
     public void addTablero(Tablero tablero){
         try{
-            jdbcTemplate.update("insert into tablero (id_tablero, nombre, usuario) values(?,?,?)",
-                    tablero.getIdTablero(),tablero.getNombre(),tablero.getUsuario());
+            jdbcTemplate.update("insert into tablero (nombre, usuario) values(?,?)",
+                    tablero.getNombre(),tablero.getUsuario());
         }catch (EmptyResultDataAccessException e ){
             e.printStackTrace();
         }
@@ -44,10 +45,10 @@ public class TableroDao {
             e.printStackTrace();
         }
     }
-    public List<Tablero> getTableros(){
+    public List<Tablero> getTableros(String usuario){
         try{
-            return jdbcTemplate.query("select * from tablero",
-                    new TableroRowMapper());
+            return jdbcTemplate.query("select * from tablero where usuario=?",
+                     new TableroRowMapper(),usuario);
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();
         }

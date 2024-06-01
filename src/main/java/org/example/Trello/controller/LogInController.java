@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Random;
 
 @Controller
 public class LogInController {
@@ -57,6 +58,22 @@ public class LogInController {
             model.addAttribute("error", "El usuario ya existe");
             return "signin";
         }
+
+        //Lógica de confirmación de correo
+
+        int codigo = new Random().nextInt(999999);
+
+        String mensaje = "Por favor añade en la página web el siguiente número para que tu correo pueda confirmarse de forma adecuada: "
+                + "\n" + codigo + "\n";
+        boolean enviado = new EmailService().sendEmail(user.getEmail(),
+                "Verificación de Correo Electrónico", mensaje);
+
+        if (!enviado) {
+            model.addAttribute("error", "Error al enviar el correo electrónico." +
+                    " Por favor, inténtelo de nuevo.");
+            return "signin";
+        }
+        //todo Continuar con la confirmación de correo electrónico
 
         userDetailsDao.addUser(user);
         return "redirect:/login";

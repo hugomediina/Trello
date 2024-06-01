@@ -40,22 +40,24 @@
             <h1 class="my-4">Mis Tableros</h1>
         </div>
     </div>
-    <!--todo HACER MEJOR-->
     <div class="row">
         <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card board-card add-board-card" data-toggle="modal" data-target="#addBoardModal">
+            <a th:href="add"><div class="card board-card add-board-card" >
                 <div class="card-body text-center">
-                    <a style="color: black" th:href="add" role="button">+ Añadir Tablero</a>
+                    <span>+ Añadir Tablero</span>
+                </div>
+            </div></a>
+        </div>
+        <div th:each="tablero: ${tableroList}" class="col-md-3 col-sm-6 mb-4">
+            <div class="card board-card">
+                <div class="card-body text-center">
+                    <a th:href="@{/tablero/{identificador}(identificador=${tablero.idTablero})}"
+                       th:text="${tablero.nombre}"></a>
                 </div>
             </div>
         </div>
-
-    </div>
-    <div class="board-card" th:each="tablero: ${tableroList}">
-        <a th:href="@{/tablero/{identificador}(identificador=${tablero.idTablero})}">
-            <div th:text="${tablero.nombre}"></div>
-        </a>
     </div>
 </div>
+
 </body>
 </html>
