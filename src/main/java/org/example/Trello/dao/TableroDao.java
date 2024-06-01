@@ -45,6 +45,14 @@ public class TableroDao {
             e.printStackTrace();
         }
     }
+    public void deleteTablero(int id_tablero){
+        try {
+            jdbcTemplate.update("delete from tablero where id_tablero=?",
+                    id_tablero);
+        }catch (EmptyResultDataAccessException e){
+            e.printStackTrace();
+        }
+    }
     public List<Tablero> getTableros(String usuario){
         try{
             return jdbcTemplate.query("select * from tablero where usuario=?",

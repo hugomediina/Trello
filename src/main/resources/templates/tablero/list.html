@@ -31,6 +31,12 @@
             color: rgba(5, 5, 5, 0.77);
             cursor: pointer;
         }
+        .cerrar {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -50,14 +56,20 @@
         </div>
         <div th:each="tablero: ${tableroList}" class="col-md-3 col-sm-6 mb-4">
             <div class="card board-card">
+                <div class="cerrar">
+                    <a th:href="@{/tablero/delete/{identificador}(identificador=${tablero.idTablero})}">
+                        <button class="btn btn-secondary btn-sm " type="button">
+                            X
+                        </button>
+                    </a>
+                </div>
                 <div class="card-body text-center">
-                    <a th:href="@{/tablero/{identificador}(identificador=${tablero.idTablero})}"
+                    <a th:href="@{/columna/vercolumnas/{identificador}(identificador=${tablero.idTablero})}"
                        th:text="${tablero.nombre}"></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>

@@ -1,11 +1,13 @@
 package org.example.Trello.controller;
 
+import org.bouncycastle.math.raw.Mod;
 import org.example.Trello.dao.TableroDao;
 import org.example.Trello.model.Tablero;
 import org.example.Trello.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,4 +55,17 @@ public class TableroController {
         tableroDao.addTablero(tablero);
         return "redirect:list";
     }
+
+    @RequestMapping(value = "/delete/{id_tablero}")
+    public String processAndDelete(@PathVariable int id_tablero, Model model,
+                                   HttpSession httpSession){
+        UserDetails user = (UserDetails) httpSession.getAttribute("user");
+        if(user==null){
+            httpSession.setAttribute("path", "/tablero/list");
+            return "login";
+        }
+        tableroDao.deleteTablero(id_tablero);
+        return "redirect:../list";
+    }
+
 }

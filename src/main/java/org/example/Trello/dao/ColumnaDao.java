@@ -20,8 +20,8 @@ public class ColumnaDao {
     }
     public void addColumna(Columna columna){
         try{
-            jdbcTemplate.update("insert into columna (id_columna, nombre,id_tablero) values(?,?,?)",
-                    columna.getIdColumna(),columna.getNombre(),columna.getIdTablero());
+            jdbcTemplate.update("insert into columna ( nombre,id_tablero) values(?,?)",
+                    columna.getNombre(),columna.getIdTablero());
         }catch (EmptyResultDataAccessException e){
             e.printStackTrace();
         }

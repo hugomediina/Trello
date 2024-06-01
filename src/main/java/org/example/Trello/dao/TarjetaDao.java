@@ -21,7 +21,7 @@ public class TarjetaDao {
 
     public void addTarjeta(Tarjeta tarjeta){
         try{
-            jdbcTemplate.update("insert into tarjeta (id_tarjeta, titulo, descrpcion,id_columna) values (?,?,?,?)",
+            jdbcTemplate.update("insert into tarjeta ( titulo, descrpcion,id_columna) values (?,?,?)",
                     tarjeta.getIdTarjeta(),tarjeta.getTitulo(),tarjeta.getDescripcion(),tarjeta.getIdColumna());
         }catch (EmptyResultDataAccessException e){
             e.printStackTrace();

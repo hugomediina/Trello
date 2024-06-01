@@ -78,4 +78,9 @@ public class LogInController {
         userDetailsDao.addUser(user);
         return "redirect:/login";
     }
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
