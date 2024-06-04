@@ -1,12 +1,19 @@
 <div class="loggeduser" th:object="${session}">
-    <p th:if="*{user == null}">
-        <button type="button" class="btn btn-secondary">
-            <a style="color: white" href="/login" th:href="@{/login}"> Iniciar Sesión</a>
-        </button>
-    </p>
+    <div style="display: flex;">
+        <p th:if="*{user == null}">
+            <button type="button" class="btn btn-primary" style="background-color: white; border: none;">
+                <a style="color: black" href="/signin" th:href="@{/signin}"> Registrarte </a>
+            </button>
+        </p>
+        <p th:if="*{user == null}">
+            <button type="button" class="btn btn-primary">
+                <a style="color: white" href="/login" th:href="@{/login}"> Iniciar Sesión</a>
+            </button>
+        </p>
+    </div>
+    
     <p th:unless="*{user == null}">
         <span style="" th:text="'Bienvenid@ ' + *{user.username}" ></span>
         <a href="/logout" th:href="@{/logout}">Salir</a>
-        <!--todo solucionar error logout-->
     </p>
 </div>

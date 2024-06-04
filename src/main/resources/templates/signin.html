@@ -34,7 +34,11 @@
                                 <input class="form-control" id="password" type="password" th:field="*{password}" placeholder="Contraseña" required/>
                             </div>
                             <input type="hidden" th:field="*{tipo}" th:value="1">
-                            <button class="btn btn-primary btn-block" type="submit">Regístrate</button>
+                            <button class="btn btn-primary btn-block submit-button" type="submit">Regístrate</button>
+                            <button class="btn btn-primary btn-block spinner-button" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                                <span role="status">Loading...</span>
+                            </button>
                         </form>
                     </div>
                     <div class="card-footer text-center">

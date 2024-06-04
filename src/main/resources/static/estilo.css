@@ -1,0 +1,10 @@
+/*LOADER*/
+.spinner-button {
+    display: none;
+}
+.submit-button:disabled + .spinner-button {
+    display: inline-block;
+}
+.submit-button:disabled {
+    display: none;
+}

@@ -1,5 +1,6 @@
 package org.example.Trello.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -9,8 +10,11 @@ import java.util.Properties;
 @Service
 public class EmailService {
 
-    private final String email = System.getenv("EMAIL");
-    private final String password = System.getenv("PASSWORD");
+    @Value("${email}")
+    private String email;
+
+    @Value("${password}")
+    private String password;
 
     public boolean sendEmail(String to, String subject, String content) {
         Properties props = new Properties();

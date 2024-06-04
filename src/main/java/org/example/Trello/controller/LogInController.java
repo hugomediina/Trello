@@ -49,7 +49,7 @@ public class LogInController {
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public String registerUser(@ModelAttribute("user") UserDetails user, Model model){
+    public String registerUser(@ModelAttribute("user") UserDetails user, HttpSession httpSession,Model model){
         System.out.println(user);
 
         UserDetails usuario = userDetailsDao.loadByUsername(user.getUsername(),user.getPassword());
@@ -73,14 +73,32 @@ public class LogInController {
                     " Por favor, inténtelo de nuevo.");
             return "signin";
         }
-        //todo Continuar con la confirmación de correo electrónico
 
-        userDetailsDao.addUser(user);
-        return "redirect:/login";
+        httpSession.setAttribute("user", user);
+        model.addAttribute("numero", codigo);
+        return "confirmar";
     }
+
+
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }
+
+
+    @RequestMapping("/confirmar")
+    public String confirmar(HttpSession session, Model model,@ModelAttribute("codigo") int guess) {
+        Integer codigo = (Integer) model.getAttribute("codigo");
+        if(codigo != null && codigo==guess ){
+            userDetailsDao.addUser((UserDetails) session.getAttribute("user"));
+            session.removeAttribute("user");
+            return "redirect:/login";
+        }
+        else{
+                model.addAttribute("error", "El código ingresado es incorrecto. Inténtelo de nuevo.");
+            return "confirmar";
+        }
+    }
+    
 }
