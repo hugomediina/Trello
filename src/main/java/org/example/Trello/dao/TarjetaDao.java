@@ -1,5 +1,6 @@
 package org.example.Trello.dao;
 
+import org.example.Trello.model.Columna;
 import org.example.Trello.model.Tablero;
 import org.example.Trello.model.Tarjeta;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +53,10 @@ public class TarjetaDao {
             e.printStackTrace();
         }
     }
-    public Tablero getTablero(int columnaId) {
+    public Columna getTablero(int columnaId) {
         try {
-            return jdbcTemplate.queryForObject("SELECT id_tablero FROM columna WHERE id_columna=?",
-             new TableroRowMapper(),columnaId);
+            return jdbcTemplate.queryForObject("SELECT * FROM columna WHERE id_columna=?",
+             new ColumnaRowMapper(),columnaId);
         } catch (EmptyResultDataAccessException e) {
             return null; 
         }
