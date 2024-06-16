@@ -1,5 +1,6 @@
 package org.example.Trello.dao;
 
+import org.example.Trello.model.Tablero;
 import org.example.Trello.model.Tarjeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -21,8 +22,8 @@ public class TarjetaDao {
 
     public void addTarjeta(Tarjeta tarjeta){
         try{
-            jdbcTemplate.update("insert into tarjeta ( titulo, descrpcion,id_columna) values (?,?,?)",
-                    tarjeta.getIdTarjeta(),tarjeta.getTitulo(),tarjeta.getDescripcion(),tarjeta.getIdColumna());
+            jdbcTemplate.update("insert into tarjeta ( titulo, descripcion,id_columna) values (?,?,?)",
+                    tarjeta.getTitulo(),tarjeta.getDescripcion(),tarjeta.getIdColumna());
         }catch (EmptyResultDataAccessException e){
             e.printStackTrace();
         }
@@ -43,6 +44,23 @@ public class TarjetaDao {
             e.printStackTrace();
         }
     }
+    public void deleteTarjeta(int tarjeta){
+        try{
+            jdbcTemplate.update("delete from tarjeta where id_tarjeta=?",
+                    tarjeta);
+        }catch (EmptyResultDataAccessException e){
+            e.printStackTrace();
+        }
+    }
+    public Tablero getTablero(int columnaId) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT id_tablero FROM columna WHERE id_columna=?",
+             new TableroRowMapper(),columnaId);
+        } catch (EmptyResultDataAccessException e) {
+            return null; 
+        }
+    }
+    
     public List<Tarjeta> getTarjetas(){
         try{
             return jdbcTemplate.query("select * from tarjeta",

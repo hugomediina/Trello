@@ -1,6 +1,5 @@
 package org.example.Trello.controller;
 
-import org.bouncycastle.math.raw.Mod;
 import org.example.Trello.dao.TableroDao;
 import org.example.Trello.model.Tablero;
 import org.example.Trello.model.UserDetails;
@@ -51,7 +50,6 @@ public class TableroController {
                                    HttpSession httpSession) {
         UserDetails userDetails = (UserDetails) httpSession.getAttribute("user");
         tablero.setUsuario(userDetails.getUsername());
-        System.out.println(tablero);
         tableroDao.addTablero(tablero);
         return "redirect:list";
     }

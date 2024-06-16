@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Columna</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Añadir Nueva Columna</h2>
+            <form th:action="@{/columna/add}"  th:object="${columna}" method="post">
+                <div class="form-group">
+                    <label>Nombre del Tablero</label>
+                    <input type="text" class="form-control" name="boardName" th:field="${columna.nombre}" required>
+                    <input type="hidden"th:field="${columna.idTablero}">
+                    <input type="hidden"th:field="${columna.idColumna}">
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

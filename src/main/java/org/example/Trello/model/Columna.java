@@ -1,9 +1,12 @@
 package org.example.Trello.model;
 
+import java.util.List;
+
 public class Columna {
     private int idColumna;
     private String nombre;
     private int idTablero;
+    private List<Tarjeta> tarjetas;
 
     public int getIdColumna() {
         return idColumna;
@@ -28,7 +31,13 @@ public class Columna {
     public void setIdTablero(int idTablero) {
         this.idTablero = idTablero;
     }
+    public List<Tarjeta> getTarjetas() {
+        return tarjetas;
+    }
 
+    public void setTarjetas(List<Tarjeta> tarjetas) {
+        this.tarjetas = tarjetas;
+    }
     @Override
     public String toString() {
         return "Columna{" +

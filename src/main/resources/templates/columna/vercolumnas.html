@@ -7,29 +7,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <title>Mis Tableros - Trello</title>
     <style>
+        .board-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 10px;
+        }
+
+        .board-column {
+            margin: 0 10px;
+            flex: 0 0 300px;
+            background-color: #f4f5f7;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+        }
+
         .board-card {
-            margin: 10px;
-            padding: 20px;
-            width: 200px;
-            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
             transition: transform 0.3s ease;
         }
 
         .board-card:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
         .add-board-card {
-            font-size: 1.5rem;
-            color: rgba(5, 5, 5, 0.77);
-            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+
+        .add-board-card:hover {
+            background-color: #dfe1e6;
+            color: black;
         }
 
         .cerrar {
@@ -40,22 +56,36 @@
     </style>
 </head>
 <body>
-<div layout:fragment="content" class="container">
+<div layout:fragment="content" class="container-fluid">
     <div class="row">
         <div class="col">
             <h1 class="my-4" th:text="${tablero.nombre}"></h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3 col-sm-6 mb-4">
-            <a href="add" data-bs-toggle="modal" data-bs-target="#añadeTableroModal">
-                <div class="card board-card add-board-card">
-                    <div class="card-body text-center">
-                        <span>+ Añadir Columna</span>
-                    </div>
+    <div class="board-container">
+        <div th:each="columna : ${columnaList}" class="board-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 th:text="${columna.nombre}"></h5>
+                <a th:href="@{/columna/delete/{identificador_tablero}/{identificador}(identificador=${columna.idColumna},identificador_tablero=${tablero.idTablero})}" class="text-danger">
+                    <button style="border: none;" type="button" class="btn-close" aria-label="Close">X</button>
+                </a>
+            </div>
+            <div class="board-card" th:each="tarjeta : ${columna.tarjetas}">
+                <div class="card-body">
+                    <p th:text="${tarjeta.titulo}"></p>
+                    <p th:text="${tarjeta.descripcion}"></p>
                 </div>
+            </div>
+            <div class="board-card add-board-card">
+                <a th:href="@{/tarjeta/add/{columnaId}(columnaId=${columna.idColumna})}" class="text-center">+ Añadir Tarjeta</a>
+            </div>
+        </div>
+        <div class="board-column">
+            <a th:href="@{/columna/add/{identificador}(identificador=${tablero.idTablero})}" class="add-board-card">
+                <span>+ Añadir Columna</span>
             </a>
-       
+        </div>
+    </div>
 </div>
 </body>
 </html>

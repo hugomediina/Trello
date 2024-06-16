@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Añadir Tarjeta</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2>Añadir Nuevo Tablero</h2>
+            <form th:action="@{/tarjeta/add/{id_columna} (id_columna=${id_columna})}"  th:object="${tarjeta}" method="post">
+                <div class="form-group">
+                    <label>Nombre del Tablero</label>
+                    <input type="text" class="form-control" name="boardName" th:field="${tarjeta.titulo}" required>
+                    <label>Descripción: </label>
+                    <input type="text" class="form-control" name="boardName" th:field="${tarjeta.descripcion}" required>
+                    <input type="hidden"th:field="${tarjeta.idColumna}">
+                    <input type="hidden"th:field="${tarjeta.idTarjeta}">
+                </div>
+                <button type="submit" class="btn btn-primary">Añadir</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
