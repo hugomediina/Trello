@@ -45,6 +45,7 @@ public class TableroDao {
             e.printStackTrace();
         }
     }
+    
     public void deleteTablero(int id_tablero){
         try {
             jdbcTemplate.update("delete from tablero where id_tablero=?",

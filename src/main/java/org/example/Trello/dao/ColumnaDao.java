@@ -16,7 +16,7 @@ public class ColumnaDao {
 
     @Autowired
     public ColumnaDao(DataSource dataSource){
-        this.jdbcTemplate=new JdbcTemplate();
+        this.jdbcTemplate=new JdbcTemplate(dataSource);
     }
     public void addColumna(Columna columna){
         try{
@@ -42,10 +42,10 @@ public class ColumnaDao {
             e.printStackTrace();
         }
     }
-    public List<Columna> getColumnas(){
+    public List<Columna> getColumnas(int tablero){
         try{
-            return jdbcTemplate.query("select * from columna",
-                    new ColumnaRowMapper());
+            return jdbcTemplate.query("select * from columna where id_tablero=?",
+                    new ColumnaRowMapper(),tablero);
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();
         }
