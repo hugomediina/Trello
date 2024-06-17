@@ -58,7 +58,8 @@ public class TarjetaController {
             httpSession.setAttribute("path", "/tarjeta/delete/" + id_columna + "/" + id_tarjeta);
             return "redirect:/login";
         }
+        int id_tablero = tarjetaDao.getTablero(id_columna).getIdTablero();
         tarjetaDao.deleteTarjeta(id_tarjeta);
-        return "redirect:/";
+        return "redirect:/columna/vercolumnas/"+id_tablero;
     }
 }

@@ -3,7 +3,6 @@
       layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <title>Mis Tableros - Trello</title>
     <style>
@@ -56,16 +55,18 @@
                 </div>
             </a>
         </div>
-        <div id="sortable-container" class="col-md-9 col-sm-12 row">
-            <div th:each="tablero : ${tableroList}" class="col-md-3 col-sm-6 mb-4">
-                <div class="card board-card">
-                    <div class="cerrar">
-                        <a th:href="@{/tablero/delete/{identificador}(identificador=${tablero.idTablero})}">
-                            <button type="button" style="border: none; background-color: white;" class="btn-close" aria-label="Close">X</button>
-                        </a>
-                    </div>
-                    <div class="card-body text-center">
-                        <a th:href="@{/columna/vercolumnas/{identificador}(identificador=${tablero.idTablero})}" th:text="${tablero.nombre}"></a>
+        <div class="col-md-9 col-sm-12">
+            <div class="row" id="sortable-container">
+                <div th:each="tablero : ${tableroList}" class="col-md-3 col-sm-6 mb-4">
+                    <div class="card board-card" draggable="true">
+                        <div class="cerrar">
+                            <a th:href="@{/tablero/delete/{identificador}(identificador=${tablero.idTablero})}">
+                                <button type="button" style="border: none; background-color: white;" class="btn-close" aria-label="Close">X</button>
+                            </a>
+                        </div>
+                        <div class="card-body text-center">
+                            <a th:href="@{/columna/vercolumnas/{identificador}(identificador=${tablero.idTablero})}" th:text="${tablero.nombre}"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,18 +99,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        new Sortable(document.getElementById('sortable-container'), {
-            animation: 150,
-            ghostClass: 'sortable-ghost',
-        });
-    });
-</script>
-
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </body>
 </html>
