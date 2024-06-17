@@ -1,7 +1,4 @@
 package org.example.Trello.model;
-
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
-
 public class Tablero {
     private int idTablero;
     private String nombre;

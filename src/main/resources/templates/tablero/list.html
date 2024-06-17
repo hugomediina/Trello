@@ -4,39 +4,8 @@
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
     <title>Mis Tableros - Trello</title>
-    <style>
-        .board-card {
-            margin: 10px;
-            padding: 20px;
-            width: 200px;
-            height: 150px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .board-card:hover {
-            transform: scale(1.05);
-        }
-
-        .add-board-card {
-            font-size: 1.5rem;
-            color: rgba(5, 5, 5, 0.77);
-            cursor: pointer;
-        }
-
-        .cerrar {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-    </style>
 </head>
 <body>
 <div layout:fragment="content" class="container">
@@ -47,7 +16,7 @@
     </div>
     <div class="row">
         <div class="col-md-3 col-sm-6 mb-4">
-            <a href="add" data-bs-toggle="modal" data-bs-target="#añadeTableroModal">
+            <a href="add"> 
                 <div class="card board-card add-board-card">
                     <div class="card-body text-center">
                         <span>+ Añadir Tablero</span>
@@ -74,31 +43,8 @@
     </div>
 </div>
 
-<!-- MODAL-->
-<div class="modal fade" id="añadeTableroModal" tabindex="-1" aria-labelledby="añadeTableroModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="añadeTableroModalLabel">Añadir Nuevo Tablero</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/tablero/add}" th:object="${tablero}" method="post">
-                    <div class="form-group">
-                        <label>Nombre del Tablero</label>
-                        <input type="text" class="form-control" name="boardName" th:field="${tablero.nombre}" required>
-                        <input type="hidden" th:field="${tablero.idTablero}">
-                        <input type="hidden" th:field="${tablero.usuario}">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2poT/ZxE1RVvo6zz6t1gO7RYoYJoVn6kQmIp8DZnKkZl3LcY1Lr0n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-6sQDFwQ+8LAk5I2y7UC29rohh4dF5oBUK5RFsqaEFeoB9BG76eFAJm7vVVFIhvj5" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Frt9OpabUJ4z5FDPG2K1r7/tpp82GIlTqW0uXHYY9GK8" crossorigin="anonymous"></script>
 </body>
 </html>
