@@ -52,11 +52,7 @@
             box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
             height: 100px;
         }
-        .add-board-column:hover {
-            background-color: #dfe1e6;
-            color: black;
-        }
-        .add-board-card:hover {
+        .add-board-column:hover, .add-board-card:hover {
             background-color: #dfe1e6;
             color: black;
         }
@@ -75,17 +71,20 @@
             <h1 class="my-4" th:text="${tablero.nombre}"></h1>
         </div>
     </div>
-    <div class="board-container">
+    <div class="board-container" id="boardContainer">
         <div th:each="columna : ${columnaList}" class="board-column">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 th:text="${columna.nombre}"></h5>
                 <a th:href="@{/columna/delete/{identificador_tablero}/{identificador}(identificador=${columna.idColumna},identificador_tablero=${tablero.idTablero})}" class="text-danger">
-                    <button style="border: none;" type="button" class="btn-close" aria-label="Close">X</button>
+                    <button style="border: none;" type="button" class="btn-close" aria-label="Eliminar Columna">X</button>
                 </a>
             </div>
-            <div class="board-card" th:each="tarjeta : ${columna.tarjetas}">
+            <div class="board-card" th:each="tarjeta : ${columna.tarjetas}" draggable="true">
                 <a th:href="@{/tarjeta/delete/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
-                    <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Close"><img src="/images/papelera.png" style="height: 20px;width: auto; " alt="papelera"></button>
+                    <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/papelera.png" style="height: 20px;width: auto;" alt="papelera"></button>
+                </a>
+                <a th:href="@{/tarjeta/update/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
+                    <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/modificar.png" style="height: 20px;width: auto;" alt="modificar"></button>
                 </a>
                 <div class="card-body">
                     <h6 th:text="${tarjeta.titulo}"></h6>

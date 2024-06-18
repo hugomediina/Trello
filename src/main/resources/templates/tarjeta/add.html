@@ -7,15 +7,15 @@
 </head>
 <body>
 <div class="container mt-5">
-    <div class="row">
+    <div class="row" >
         <div class="col-md-6 offset-md-3">
-            <h2>Añadir Nuevo Tablero</h2>
+            <h2>Añadir Nueva Tarjeta</h2>
             <form th:action="@{/tarjeta/add/{id_columna} (id_columna=${id_columna})}"  th:object="${tarjeta}" method="post">
                 <div class="form-group">
                     <label>Nombre del Tablero</label>
                     <input type="text" class="form-control" name="boardName" th:field="${tarjeta.titulo}" required>
                     <label>Descripción: </label>
-                    <input type="text" class="form-control" name="boardName" th:field="${tarjeta.descripcion}" required>
+                    <input type="text" class="form-control" name="boardName" th:field="${tarjeta.descripcion}">
                     <input type="hidden"th:field="${tarjeta.idColumna}">
                     <input type="hidden"th:field="${tarjeta.idTarjeta}">
                 </div>
