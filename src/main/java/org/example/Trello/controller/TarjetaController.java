@@ -72,25 +72,27 @@ public class TarjetaController {
             httpSession.setAttribute("path", "/tarjeta/update/" + id_columna+"/"+id_tarjeta);
             return "redirect:/login";
         }
+        Tarjeta tarjeta = tarjetaDao.getTarjeta(id_tarjeta);
+
         httpSession.setAttribute("id_columna", id_columna);
         httpSession.setAttribute("id_tarjeta", id_tarjeta);
-        model.addAttribute("tarjeta", new Tarjeta());
-        return "tarjeta/add";
+        model.addAttribute("tarjeta", tarjeta);
+        return "tarjeta/update";
     }
 
-    @RequestMapping(value = "/update")
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String processUpdate(@ModelAttribute("tarjeta") Tarjeta tarjeta,
-                                @ModelAttribute("id_columna") int id_columna,
-                                @ModelAttribute("id_tarjeta") int id_tarjeta,
                                 HttpSession httpSession) {
-
+        tarjeta.setIdColumna((int) httpSession.getAttribute("id_columna"));
+        tarjeta.setIdTarjeta((int) httpSession.getAttribute("id_tarjeta"));
         UserDetails user = (UserDetails) httpSession.getAttribute("user");
         if (user == null) {
-            httpSession.setAttribute("path", "/tarjeta/update/" + id_columna + "/" + id_tarjeta);
+            httpSession.setAttribute("path", "/tarjeta/update/" + tarjeta.getIdColumna() + "/" + tarjeta.getIdTarjeta());
             return "redirect:/login";
         }
-        int id_tablero = tarjetaDao.getTablero(id_columna).getIdTablero();
-        tarjetaDao.updateTarjeta(id_tarjeta);
-        return "redirect:/columna/vercolumnas/"+id_tablero;
-    }
+
+        int id_tablero = tarjetaDao.getTablero(tarjeta.getIdColumna()).getIdTablero();
+        tarjetaDao.updateTarjeta(tarjeta);
+        return "redirect:/columna/vercolumnas/" + id_tablero;
+        }
 }

@@ -1,0 +1,56 @@
+/*COLUMNAS Y TARJETAS*/
+.board-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.board-column {
+    margin: 0 10px;
+    flex: 0 0 300px;
+    background-color: #f4f5f7;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+}
+
+.board-card {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.board-card:hover {
+    transform: scale(1.03);
+}
+
+.add-board-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+.add-board-column {
+    display: flex;
+    justify-content: center;
+    margin: 0 10px;
+    flex: 0 0 300px;
+    background-color: #f4f5f7;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+    height: 100px;
+}
+.add-board-column:hover, .add-board-card:hover {
+    background-color: #dfe1e6;
+    color: black;
+}
+
+.cerrar {
+    position: static;  
+    top: 10px;
+    right: 10px;
+}

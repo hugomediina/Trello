@@ -15,7 +15,7 @@
                     <label>Nombre del Tablero</label>
                     <input type="text" class="form-control" name="boardName" th:field="${tarjeta.titulo}" required>
                     <label>Descripción: </label>
-                    <input type="text" class="form-control" name="boardName" th:field="${tarjeta.descripcion}">
+                    <textarea type="text" class="form-control" name="boardName" th:field="${tarjeta.descripcion}"></textarea>
                     <input type="hidden"th:field="${tarjeta.idColumna}">
                     <input type="hidden"th:field="${tarjeta.idTarjeta}">
                 </div>

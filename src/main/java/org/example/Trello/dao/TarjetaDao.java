@@ -31,8 +31,8 @@ public class TarjetaDao {
     }
     public void updateTarjeta(Tarjeta tarjeta){
         try{
-            jdbcTemplate.update("update tarjeta set titulo=?, descripcion=?,id_colmna=? where id_tarjeta=?",
-                    tarjeta.getTitulo(),tarjeta.getDescripcion(),tarjeta.getIdColumna(),tarjeta.getIdColumna());
+            jdbcTemplate.update("update tarjeta set titulo=?, descripcion=?,id_columna=? where id_tarjeta=?",
+                    tarjeta.getTitulo(),tarjeta.getDescripcion(),tarjeta.getIdColumna(),tarjeta.getIdTarjeta());
         }catch (EmptyResultDataAccessException e){
             e.printStackTrace();
         }
@@ -61,7 +61,14 @@ public class TarjetaDao {
             return null; 
         }
     }
-    
+    public Tarjeta getTarjeta(int id_tarjeta){
+        try{
+            return jdbcTemplate.queryForObject("select * from tarjeta where id_tarjeta=?",
+            new TarjetaRowMapper(),id_tarjeta);
+        }catch(EmptyResultDataAccessException e){
+            return null;
+        }
+    }
     public List<Tarjeta> getTarjetas(){
         try{
             return jdbcTemplate.query("select * from tarjeta",

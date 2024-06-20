@@ -5,63 +5,10 @@
     <meta charset="UTF-8"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/estiloColumnas.css" th:href="@{/estiloColumnas.css}">
     <title>Mis Tableros - Trello</title>
     <style>
-        .board-container {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px;
-        }
-
-        .board-column {
-            margin: 0 10px;
-            flex: 0 0 300px;
-            background-color: #f4f5f7;
-            border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-        }
-
-        .board-card {
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-            transition: transform 0.3s ease;
-        }
-
-        .board-card:hover {
-            transform: scale(1.03);
-        }
-
-        .add-board-card {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100px;
-        }
-        .add-board-column {
-            display: flex;
-            justify-content: center;
-            margin: 0 10px;
-            flex: 0 0 300px;
-            background-color: #f4f5f7;
-            border-radius: 5px;
-            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-            height: 100px;
-        }
-        .add-board-column:hover, .add-board-card:hover {
-            background-color: #dfe1e6;
-            color: black;
-        }
-
-        .cerrar {
-            position: static;  
-            top: 10px;
-            right: 10px;
-        }
+        
     </style>
 </head>
 <body>
@@ -72,25 +19,28 @@
         </div>
     </div>
     <div class="board-container" id="boardContainer">
-        <div th:each="columna : ${columnaList}" class="board-column">
+        <div th:each="columna : ${columnaList}" class="board-column" >
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 th:text="${columna.nombre}"></h5>
                 <a th:href="@{/columna/delete/{identificador_tablero}/{identificador}(identificador=${columna.idColumna},identificador_tablero=${tablero.idTablero})}" class="text-danger">
                     <button style="border: none;" type="button" class="btn-close" aria-label="Eliminar Columna">X</button>
                 </a>
             </div>
-            <div class="board-card" th:each="tarjeta : ${columna.tarjetas}" draggable="true">
-                <a th:href="@{/tarjeta/delete/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
-                    <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/papelera.png" style="height: 20px;width: auto;" alt="papelera"></button>
-                </a>
-                <a th:href="@{/tarjeta/update/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
-                    <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/modificar.png" style="height: 20px;width: auto;" alt="modificar"></button>
-                </a>
-                <div class="card-body">
-                    <h6 th:text="${tarjeta.titulo}"></h6>
-                    <p th:text="${tarjeta.descripcion}"></p>
+            <div id="tarjeta">
+                <div class="board-card" th:each="tarjeta : ${columna.tarjetas}" >
+                    <a th:href="@{/tarjeta/delete/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
+                        <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/papelera.png" style="height: 20px;width: auto;" alt="papelera"></button>
+                    </a>
+                    <a th:href="@{/tarjeta/update/{idColumna}/{idTarjeta}(idColumna = ${columna.idColumna},idTarjeta=${tarjeta.idTarjeta})}" class="text-danger">
+                        <button style="border: none; background-color: white;" type="button" class="btn-close" aria-label="Eliminar Tarjeta"><img src="/images/modificar.png" style="height: 20px;width: auto;" alt="modificar"></button>
+                    </a>
+                    <div class="card-body">
+                        <h6 th:text="${tarjeta.titulo}"></h6>
+                        <p th:text="${tarjeta.descripcion}"></p>
+                    </div>
                 </div>
             </div>
+            
             <div class="add-board-card">
                 <a th:href="@{/tarjeta/add/{columnaId}(columnaId=${columna.idColumna})}" class="text-center">+ Añadir Tarjeta</a>
             </div>
@@ -101,6 +51,29 @@
             </a>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const columnas = document.querySelectorAll('#boardContainer');
+            columnas.forEach(columna => {
+                new Sortable(columna, {
+                    group: 'nested',
+                    animation: 150,
+                });
+            });
+        }); 
+        document.addEventListener('DOMContentLoaded', () => {
+            const tarjetas = document.querySelectorAll('#tarjeta');
+    
+            tarjetas.forEach(tarjeta => {
+                new Sortable(tarjeta, {
+                    group: 'atomic',
+                    animation: 150,
+                });
+            });
+        });
+    </script>
+    
 </div>
 </body>
 </html>
