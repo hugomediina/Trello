@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -54,7 +55,7 @@ public class ColumnaDao {
     }
     public List<Columna> getColumnas(int tablero){
         try{
-            return jdbcTemplate.query("select * from columna where id_tablero=?",
+            return jdbcTemplate.query("select * from columna where id_tablero=? order by posicion",
                     new ColumnaRowMapper(),tablero);
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();
@@ -75,5 +76,23 @@ public class ColumnaDao {
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();
         }
+    }
+
+    @Transactional
+    public void cambiarPosiciones(int idColumna1, int idColumna2){
+            try{
+                Columna columna1 = jdbcTemplate.queryForObject("select * from columna where id_columna=?", new ColumnaRowMapper(),idColumna1);
+                Columna columna2 = jdbcTemplate.queryForObject("select * from columna where id_columna=?", new ColumnaRowMapper(),idColumna2);
+                int pos1 = columna1.getPosicion();
+                int pos2 = columna2.getPosicion();
+                columna1.setPosicion(pos2);
+                columna2.setPosicion(pos1);
+                jdbcTemplate.update("update columna set posicion=? where id_columna=?",
+                        pos2,columna1.getIdColumna());
+                jdbcTemplate.update("update columna set posicion=? where id_columna=?",
+                    pos1,columna2.getIdColumna());
+            }catch(EmptyResultDataAccessException e){
+                e.printStackTrace();;
+            }
     }
 }

@@ -13,6 +13,7 @@ public class ColumnaRowMapper implements RowMapper<Columna> {
         columna.setIdColumna(rs.getInt("id_columna"));
         columna.setNombre(rs.getString("nombre"));
         columna.setIdTablero(rs.getInt("id_tablero"));
+        columna.setPosicion(rs.getInt("posicion"));
         return columna;
     }
 }

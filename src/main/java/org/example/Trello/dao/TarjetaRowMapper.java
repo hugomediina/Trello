@@ -14,6 +14,7 @@ public class TarjetaRowMapper implements RowMapper<Tarjeta> {
         tarjeta.setTitulo(rs.getString("titulo"));
         tarjeta.setDescripcion(rs.getString("descripcion"));
         tarjeta.setIdColumna(rs.getInt("id_columna"));
+        tarjeta.setPosicion(rs.getInt("posicion"));
         return tarjeta;
     }
 }

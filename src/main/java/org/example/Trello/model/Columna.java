@@ -7,6 +7,14 @@ public class Columna {
     private String nombre;
     private int idTablero;
     private List<Tarjeta> tarjetas;
+    private int posicion;
+
+    public int getPosicion(){
+        return posicion;
+    }
+    public void setPosicion(int posicion){
+        this.posicion = posicion;
+    }
 
     public int getIdColumna() {
         return idColumna;
@@ -44,6 +52,7 @@ public class Columna {
                 "idColumna=" + idColumna +
                 ", nombre='" + nombre + '\'' +
                 ", idTablero=" + idTablero +
+                ", posicion=" + posicion +
                 '}';
     }
 }

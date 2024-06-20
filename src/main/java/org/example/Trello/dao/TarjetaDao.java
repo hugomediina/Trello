@@ -71,7 +71,7 @@ public class TarjetaDao {
     }
     public List<Tarjeta> getTarjetas(){
         try{
-            return jdbcTemplate.query("select * from tarjeta",
+            return jdbcTemplate.query("select * from tarjeta order by posicion",
                     new TarjetaRowMapper());
         }catch (EmptyResultDataAccessException e){
             return new ArrayList<>();

@@ -38,6 +38,7 @@ public class ColumnaController {
         for(Columna columna : columnaList){
             List<Tarjeta> tarjetas = columnaDao.getTarjetas(columna.getIdColumna());
             columna.setTarjetas(tarjetas);
+            System.out.println(columna.toString());
         }   
         model.addAttribute("columnaList",columnaList);
         model.addAttribute("tablero",tablero);

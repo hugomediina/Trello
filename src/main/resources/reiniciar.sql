@@ -18,6 +18,7 @@ create table columna(
     id_columna serial primary key ,
     nombre varchar(255) not null ,
     id_tablero integer not null ,
+    posicion serial not null,
     foreign key (id_tablero) references tablero(id_tablero) on delete cascade
 );
 create table tarjeta (
@@ -25,6 +26,7 @@ create table tarjeta (
     titulo varchar(255) not null,
     descripcion text,
     id_columna integer not null,
+    posicion serial not null,
     foreign key (id_columna) references columna(id_columna) on delete cascade
 );
 

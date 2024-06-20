@@ -5,6 +5,14 @@ public class Tarjeta {
     private String titulo;
     private String descripcion;
     private int idColumna;
+    private int posicion;
+
+    public int getPosicion(){
+        return posicion;
+    }
+    public void setPosicion(int posicion){
+        this.posicion = posicion;
+    }
 
     public int getIdTarjeta() {
         return idTarjeta;
@@ -45,6 +53,7 @@ public class Tarjeta {
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", idColumna=" + idColumna +
+                ", posicion=" + posicion +
                 '}';
     }
 
