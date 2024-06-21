@@ -12,4 +12,5 @@ En cuanto a la parte del frontend, se utiliza html y css, junto a BootStrap, con
 La aplicación contiene junto al archivo ``application.properties`` un file sql llamado `reiniciar.sql` que te permite crear las tablas en la base de datos y reiniciarlas si es necesario.
 
 ## Instalación
+...
 ### ¡Gracias por leer y disfruta del código! 😄
