@@ -1,3 +1,3 @@
-function actualizarPosicionColumna(idColumna1,idColumna2){
-    
-}
+//function actualizarPosicionColumna(idColumna1,idColumna2){
+//    
+//}

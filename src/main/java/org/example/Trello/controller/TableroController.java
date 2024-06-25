@@ -31,7 +31,8 @@ public class TableroController {
         }
         List<Tablero> tableroList = tableroDao.getTableros(user.getUsername());
         model.addAttribute("tableroList",tableroList);
-        return "/tablero/list";
+        model.addAttribute("tablero", new Tablero());
+        return "tablero/list";
     }
 
     @RequestMapping("/add")

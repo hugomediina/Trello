@@ -12,7 +12,7 @@
             <h2>Añadir Nueva Columna</h2>
             <form th:action="@{/columna/add}"  th:object="${columna}" method="post">
                 <div class="form-group">
-                    <label>Nombre del Tablero</label>
+                    <label>Nombre de Columna</label>
                     <input type="text" class="form-control" name="boardName" th:field="${columna.nombre}" required>
                     <input type="hidden"th:field="${columna.idTablero}">
                     <input type="hidden"th:field="${columna.idColumna}">
