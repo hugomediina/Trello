@@ -38,7 +38,7 @@ public class ColumnaController {
         for(Columna columna : columnaList){
             List<Tarjeta> tarjetas = columnaDao.getTarjetas(columna.getIdColumna());
             columna.setTarjetas(tarjetas);
-        }   
+        }
         model.addAttribute("columnaList",columnaList);
         model.addAttribute("tablero",tablero);
         return "/columna/vercolumnas";

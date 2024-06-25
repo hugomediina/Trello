@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="vercolumnas.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/estiloColumnas.css" th:href="@{/estiloColumnas.css}">
     <title>Mis Tableros - Trello</title>
@@ -64,7 +65,6 @@
         }); 
         document.addEventListener('DOMContentLoaded', () => {
             const tarjetas = document.querySelectorAll('#tarjeta');
-    
             tarjetas.forEach(tarjeta => {
                 new Sortable(tarjeta, {
                     group: 'atomic',

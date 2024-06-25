@@ -3,6 +3,7 @@
       layout:decorate="~{fragments/base}">
 <head>
     <meta charset="UTF-8"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/estilo.css" th:href="@{/estilo.css}">
     <title>Mis Tableros - Trello</title>
@@ -41,10 +42,20 @@
             </div>
         </div>
     </div>
-</div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableros = document.querySelectorAll('#sortable-container');
+            tableros.forEach(tablero => {
+                new Sortable(tablero, {
+                    group: 'grid',
+                    animation: 150,
+                });
+            });
+        }); 
+    </script>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2poT/ZxE1RVvo6zz6t1gO7RYoYJoVn6kQmIp8DZnKkZl3LcY1Lr0n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-6sQDFwQ+8LAk5I2y7UC29rohh4dF5oBUK5RFsqaEFeoB9BG76eFAJm7vVVFIhvj5" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Frt9OpabUJ4z5FDPG2K1r7/tpp82GIlTqW0uXHYY9GK8" crossorigin="anonymous"></script>
+</div>
 </body>
 </html>
