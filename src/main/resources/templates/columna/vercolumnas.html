@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-    <script src="vercolumnas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/vercolumnas.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/estiloColumnas.css" th:href="@{/estiloColumnas.css}">
     <title>Mis Tableros - Trello</title>
@@ -20,7 +21,7 @@
         </div>
     </div>
     <div class="board-container" id="boardContainer">
-        <div th:each="columna : ${columnaList}" class="board-column" >
+        <div th:each="columna : ${columnaList}" class="board-column" data-id="${columna.columnaId}">
             <div class="d-flex justify-content-between align-items-center mb-2">
                 <h5 th:text="${columna.nombre}"></h5>
                 <a th:href="@{/columna/delete/{identificador_tablero}/{identificador}(identificador=${columna.idColumna},identificador_tablero=${tablero.idTablero})}" class="text-danger">
@@ -47,12 +48,32 @@
             </div>
         </div>
         <div class="add-board-column">
-            <a th:href="@{/columna/add/{identificador}(identificador=${tablero.idTablero})}" class="add-board-card">
+            <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="add-board-card">
                 <span>+ Añadir Columna</span>
             </a>
         </div>
     </div>
-
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Tablero</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/columna/add}"  th:object="${columna}" method="post">
+                        <div class="form-group">
+                            <label>Nombre de Columna</label>
+                            <input type="text" class="form-control" name="boardName" th:field="${columna.nombre}" required>
+                            <input type="hidden"th:field="${columna.idTablero}">
+                            <input type="hidden"th:field="${columna.idColumna}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Añadir</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const columnas = document.querySelectorAll('#boardContainer');

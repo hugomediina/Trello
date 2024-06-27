@@ -3,7 +3,6 @@ package org.example.Trello.controller;
 import javax.servlet.http.HttpSession;
 
 import org.example.Trello.dao.TarjetaDao;
-import org.example.Trello.model.Columna;
 import org.example.Trello.model.Tarjeta;
 import org.example.Trello.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;

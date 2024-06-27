@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ColumnaDao {
@@ -79,20 +80,21 @@ public class ColumnaDao {
     }
 
     @Transactional
-    public void cambiarPosiciones(int idColumna1, int idColumna2){
-            try{
-                Columna columna1 = jdbcTemplate.queryForObject("select * from columna where id_columna=?", new ColumnaRowMapper(),idColumna1);
-                Columna columna2 = jdbcTemplate.queryForObject("select * from columna where id_columna=?", new ColumnaRowMapper(),idColumna2);
-                int pos1 = columna1.getPosicion();
-                int pos2 = columna2.getPosicion();
-                columna1.setPosicion(pos2);
-                columna2.setPosicion(pos1);
-                jdbcTemplate.update("update columna set posicion=? where id_columna=?",
-                        pos2,columna1.getIdColumna());
-                jdbcTemplate.update("update columna set posicion=? where id_columna=?",
-                    pos1,columna2.getIdColumna());
-            }catch(EmptyResultDataAccessException e){
-                e.printStackTrace();;
+    public void actualizarPosiciones(Map<Integer, Integer> idPosiciones) {
+        try {
+            for (Map.Entry<Integer, Integer> entry : idPosiciones.entrySet()) {
+                int idColumna = entry.getKey();
+                int nuevaPosicion = entry.getValue();
+
+                Integer posicionActual = jdbcTemplate.queryForObject(
+                        "select posicion from columna where id_columna = ?",Integer.class, idColumna);
+
+                if (posicionActual != null && !posicionActual.equals(nuevaPosicion)) {
+                    jdbcTemplate.update("update columna set posicion = ? where id_columna = ?",nuevaPosicion, idColumna);
+                }
             }
+        } catch (EmptyResultDataAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
